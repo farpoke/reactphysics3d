@@ -262,8 +262,14 @@ ENDIF()
 
 # Install target
 INSTALL(TARGETS reactphysics3d
+        EXPORT reactphysics3dTargets
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
         PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+INSTALL(EXPORT reactphysics3dTargets
+    FILE reactphysics3dConfig.cmake
+    NAMESPACE reactphysics3d::
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/reactphysics3d
 )
