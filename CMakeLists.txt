@@ -135,7 +135,6 @@ SET (REACTPHYSICS3D_HEADERS
     "src/engine/Material.h"
     "src/engine/OverlappingPair.h"
     "src/engine/Timer.h"
-    "src/engine/Timer.cpp"
     "src/collision/CollisionCallback.h"
     "src/collision/OverlapCallback.h"
     "src/mathematics/mathematics.h"
@@ -243,12 +242,12 @@ ENDIF()
 # Headers
 TARGET_INCLUDE_DIRECTORIES(reactphysics3d PUBLIC
               $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
-              $<INSTALL_INTERFACE:include>
+              $<INSTALL_INTERFACE:include/reactphysics3d>
 )
 
 # cnl requirement
-FIND_PACKAGE(Cnl REQUIRED CONFIG)
-TARGET_LINK_LIBRARIES(reactphysics3d Cnl::Cnl)
+FIND_PACKAGE(Cnl REQUIRED)
+TARGET_LINK_LIBRARIES(reactphysics3d PUBLIC Cnl::Cnl)
 
 # If we need to compile the testbed application
 IF(RP3D_COMPILE_TESTBED)
@@ -268,8 +267,13 @@ INSTALL(TARGETS reactphysics3d
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
         PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
+INSTALL(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/
+        DESTINATION include/reactphysics3d
+        FILES_MATCHING PATTERN "*.h"
+)
 INSTALL(EXPORT reactphysics3dTargets
     FILE reactphysics3dConfig.cmake
     NAMESPACE reactphysics3d::
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/reactphysics3d
 )
+ 
