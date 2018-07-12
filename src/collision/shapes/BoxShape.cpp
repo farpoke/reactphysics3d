@@ -110,7 +110,7 @@ bool BoxShape::raycast(const Ray& ray, RaycastInfo& raycastInfo, ProxyShape* pro
     for (int i=0; i<3; i++) {
 
         // If ray is parallel to the slab
-        if (std::abs(rayDirection[i]) < MACHINE_EPSILON) {
+        if (cnl::abs(rayDirection[i]) < MACHINE_EPSILON) {
 
             // If the ray's origin is not inside the slab, there is no hit
             if (ray.point1[i] > mExtent[i] || ray.point1[i] < -mExtent[i]) return false;

@@ -82,7 +82,7 @@ bool SphereShape::raycast(const Ray& ray, RaycastInfo& raycastInfo, ProxyShape* 
     if (discriminant < decimal(0.0) || raySquareLength < MACHINE_EPSILON) return false;
 
     // Compute the solution "t" closest to the origin
-    decimal t = -b - std::sqrt(discriminant);
+    decimal t = -b - cnl::sqrt(discriminant);
 
     assert(t >= decimal(0.0));
 

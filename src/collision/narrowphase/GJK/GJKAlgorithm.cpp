@@ -177,7 +177,7 @@ GJKAlgorithm::GJKResult GJKAlgorithm::testCollision(NarrowPhaseInfo* narrowPhase
 
         // Project those two points on the margins to have the closest points of both
         // object with the margins
-        decimal dist = std::sqrt(distSquare);
+        decimal dist = cnl::sqrt(distSquare);
         assert(dist > decimal(0.0));
         pA = (pA - (shape1->getMargin() / dist) * v);
         pB = body2Tobody1.getInverse() * (pB + (shape2->getMargin() / dist) * v);

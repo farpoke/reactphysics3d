@@ -139,7 +139,7 @@ bool VoronoiSimplex::isAffinelyDependent() const {
 
         // Four points are independent if the tetrahedron volume is larger than zero
         // Test in three different ways (for more robustness)
-        case 4: return std::abs((mPoints[1] - mPoints[0]).dot((mPoints[2] - mPoints[0]).cross(mPoints[3] - mPoints[0]))) <= epsilon;
+        case 4: return cnl::abs((mPoints[1] - mPoints[0]).dot((mPoints[2] - mPoints[0]).cross(mPoints[3] - mPoints[0]))) <= epsilon;
     }
 
     return false;
@@ -193,7 +193,7 @@ bool VoronoiSimplex::recomputeClosestPoint() {
 
                 {
                     int bitsUsedPoints = 0;
-                    float t;
+                    decimal t;
 
                     // The simplex is a line AB (where A=mPoints[0] and B=mPoints[1].
                     // We need to find the point of that line closest to the origin
@@ -301,7 +301,7 @@ bool VoronoiSimplex::recomputeClosestPoint() {
 
 // Compute point of a line segment that is closest to the origin
 void VoronoiSimplex::computeClosestPointOnSegment(const Vector3& a, const Vector3& b, int& bitUsedVertices,
-                                                  float& t) const {
+                                                  decimal& t) const {
 
     Vector3 AP = -a;
     Vector3 AB = b - a;
@@ -377,7 +377,7 @@ void VoronoiSimplex::computeClosestPointOnTriangle(const Vector3& a, const Vecto
 
         // The origin is in the Voronoi region of edge AB
         // We return the projection of the origin on the edge AB
-        assert(std::abs(d1 - d3) > MACHINE_EPSILON);
+        assert(cnl::abs(d1 - d3) > MACHINE_EPSILON);
         decimal v = d1 / (d1 - d3);
 
         // Set the barycentric coords of the closest point on the triangle
@@ -408,7 +408,7 @@ void VoronoiSimplex::computeClosestPointOnTriangle(const Vector3& a, const Vecto
 
         // The origin is in the Voronoi region of edge AC
         // We return the projection of the origin on the edge AC
-        assert(std::abs(d2 - d6) > MACHINE_EPSILON);
+        assert(cnl::abs(d2 - d6) > MACHINE_EPSILON);
         decimal w = d2 / (d2 - d6);
 
         // Set the barycentric coords of the closest point on the triangle
@@ -424,7 +424,7 @@ void VoronoiSimplex::computeClosestPointOnTriangle(const Vector3& a, const Vecto
 
         // The origin is in the Voronoi region of edge BC
         // We return the projection of the origin on the edge BC
-        assert(std::abs((d4 - d3) + (d5 - d6)) > MACHINE_EPSILON);
+        assert(cnl::abs((d4 - d3) + (d5 - d6)) > MACHINE_EPSILON);
         decimal w = (d4 - d3) / ((d4 - d3) + (d5 - d6));
 
         // Set the barycentric coords of the closest point on the triangle

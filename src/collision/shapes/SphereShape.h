@@ -154,7 +154,7 @@ inline void SphereShape::getLocalBounds(Vector3& min, Vector3& max) const {
  * @param mass Mass to use to compute the inertia tensor of the collision shape
  */
 inline void SphereShape::computeLocalInertiaTensor(Matrix3x3& tensor, decimal mass) const {
-    decimal diag = decimal(0.4) * mass * mMargin * mMargin;
+    decimal diag = decimal(0.4) * mass * mMargin2;
     tensor.setAllValues(diag, 0.0, 0.0,
                         0.0, diag, 0.0,
                         0.0, 0.0, diag);
@@ -162,7 +162,7 @@ inline void SphereShape::computeLocalInertiaTensor(Matrix3x3& tensor, decimal ma
 
 // Return true if a point is inside the collision shape
 inline bool SphereShape::testPointInside(const Vector3& localPoint, ProxyShape* proxyShape) const {
-    return (localPoint.lengthSquare() < mMargin * mMargin);
+    return (localPoint.lengthSquare() < mMargin2);
 }
 
 // Return the string representation of the shape

@@ -63,7 +63,7 @@ void CapsuleShape::computeLocalInertiaTensor(Matrix3x3& tensor, decimal mass) co
     decimal sum2 = decimal(0.75) * height * mMargin + decimal(0.5) * heightSquare;
 	decimal sum3 = decimal(0.25) * radiusSquare + decimal(1.0 / 12.0) * heightSquare;
 	decimal IxxAndzz = factor1 * mass * (sum1 + sum2) + factor2 * mass * sum3;
-	decimal Iyy = factor1 * mass * sum1 + factor2 * mass * decimal(0.25) * radiusSquareDouble;
+	decimal Iyy = decimal(factor1 * mass) * sum1 + decimal(factor2 * mass) * decimal(0.25) * radiusSquareDouble;
     tensor.setAllValues(IxxAndzz, 0.0, 0.0,
                         0.0, Iyy, 0.0,
                         0.0, 0.0, IxxAndzz);
@@ -115,7 +115,7 @@ bool CapsuleShape::raycast(const Ray& ray, RaycastInfo& raycastInfo, ProxyShape*
     decimal c = dDotD * k - mDotD * mDotD;
 
     // If the ray is parallel to the capsule axis
-    if (std::abs(a) < epsilon) {
+    if (cnl::abs(a) < epsilon) {
 
         // If the origin is outside the surface of the capusle's cylinder, we return no hit
         if (c > decimal(0.0)) return false;
@@ -170,7 +170,7 @@ bool CapsuleShape::raycast(const Ray& ray, RaycastInfo& raycastInfo, ProxyShape*
     if (discriminant < decimal(0.0)) return false;
 
     // Compute the smallest root (first intersection along the ray)
-    decimal t0 = t = (-b - std::sqrt(discriminant)) / a;
+    decimal t0 = t = (-b - cnl::sqrt(discriminant)) / a;
 
     // If the intersection is outside the finite cylinder of the capsule on "p" endcap side
     decimal value = mDotD + t * nDotD;
@@ -258,7 +258,7 @@ bool CapsuleShape::raycastWithSphereEndCap(const Vector3& point1, const Vector3&
     if (discriminant < decimal(0.0) || raySquareLength < MACHINE_EPSILON) return false;
 
     // Compute the solution "t" closest to the origin
-    decimal t = -b - std::sqrt(discriminant);
+    decimal t = -b - cnl::sqrt(discriminant);
 
     assert(t >= decimal(0.0));
 

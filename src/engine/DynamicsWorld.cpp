@@ -327,8 +327,8 @@ void DynamicsWorld::integrateRigidBodiesVelocities() {
             //                 => v2 = v1 * (1 - c * dt)
             decimal linDampingFactor = bodies[b]->getLinearDamping();
             decimal angDampingFactor = bodies[b]->getAngularDamping();
-            decimal linearDamping = pow(decimal(1.0) - linDampingFactor, mTimeStep);
-            decimal angularDamping = pow(decimal(1.0) - angDampingFactor, mTimeStep);
+            decimal linearDamping = cnl::exp(-linDampingFactor * mTimeStep);
+            decimal angularDamping = cnl::exp(-angDampingFactor * mTimeStep);
             mConstrainedLinearVelocities[indexBody] *= linearDamping;
             mConstrainedAngularVelocities[indexBody] *= angularDamping;
 

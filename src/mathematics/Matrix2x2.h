@@ -242,8 +242,8 @@ inline Matrix2x2 Matrix2x2::zero() {
 
 // Return the matrix with absolute values
 inline Matrix2x2 Matrix2x2::getAbsoluteMatrix() const {
-    return Matrix2x2(fabs(mRows[0][0]), fabs(mRows[0][1]),
-                     fabs(mRows[1][0]), fabs(mRows[1][1]));
+    return Matrix2x2(cnl::abs(mRows[0][0]), cnl::abs(mRows[0][1]),
+                     cnl::abs(mRows[1][0]), cnl::abs(mRows[1][1]));
 }
 
 // Overloaded operator for addition

@@ -213,7 +213,7 @@ inline void Vector2::normalize() {
 
 // Return the corresponding absolute value vector
 inline Vector2 Vector2::getAbsoluteVector() const {
-    return Vector2(std::abs(x), std::abs(y));
+    return Vector2(cnl::abs(x), cnl::abs(y));
 }
 
 // Return the axis with the minimal value

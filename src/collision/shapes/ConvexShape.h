@@ -46,6 +46,9 @@ class ConvexShape : public CollisionShape {
         /// Margin used for the GJK collision detection algorithm
         decimal mMargin;
 
+        /// Squared margin for reasons.
+        decimal mMargin2;
+
         // -------------------- Methods -------------------- //
 
         // Return a local support point in a given direction with the object margin

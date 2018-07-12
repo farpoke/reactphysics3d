@@ -122,8 +122,8 @@ bool CapsuleVsCapsuleAlgorithm::testCollision(NarrowPhaseInfo* narrowPhaseInfo, 
 					Vector3 seg2Normalized = seg2.getUnit();
 
 					// Get the vectors (among vec1 and vec2) that is the most orthogonal to the capsule 2 inner segment (smallest absolute dot product)
-					decimal cosA1 = std::abs(seg2Normalized.x);		// abs(vec1.dot(seg2))
-					decimal cosA2 = std::abs(seg2Normalized.y);	    // abs(vec2.dot(seg2))
+					decimal cosA1 = cnl::abs(seg2Normalized.x);		// abs(vec1.dot(seg2))
+					decimal cosA2 = cnl::abs(seg2Normalized.y);	    // abs(vec2.dot(seg2))
 
 					segment1ToSegment2.setToZero();
 
@@ -168,7 +168,7 @@ bool CapsuleVsCapsuleAlgorithm::testCollision(NarrowPhaseInfo* narrowPhaseInfo, 
 			// If the distance between the inner segments is not zero
 			if (closestPointsDistanceSquare > MACHINE_EPSILON) {
 
-				decimal closestPointsDistance = std::sqrt(closestPointsDistanceSquare);
+				decimal closestPointsDistance = cnl::sqrt(closestPointsDistanceSquare);
 				closestPointsSeg1ToSeg2 /= closestPointsDistance;
 
 				const Vector3 contactPointCapsule1Local = capsule1ToCapsule2SpaceTransform.getInverse() * (closestPointCapsule1Seg + closestPointsSeg1ToSeg2 * capsuleShape1->getRadius());

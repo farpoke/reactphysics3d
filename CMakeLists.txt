@@ -236,11 +236,19 @@ SET (REACTPHYSICS3D_SOURCES
 # Create the library
 ADD_LIBRARY(reactphysics3d STATIC ${REACTPHYSICS3D_HEADERS} ${REACTPHYSICS3D_SOURCES})
 
+IF(MSVC)
+    TARGET_COMPILE_OPTIONS(reactphysics3d PRIVATE /W2)
+ENDIF()
+
 # Headers
 TARGET_INCLUDE_DIRECTORIES(reactphysics3d PUBLIC
               $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
               $<INSTALL_INTERFACE:include>
 )
+
+# cnl requirement
+FIND_PACKAGE(Cnl REQUIRED CONFIG)
+TARGET_LINK_LIBRARIES(reactphysics3d Cnl::Cnl)
 
 # If we need to compile the testbed application
 IF(RP3D_COMPILE_TESTBED)

@@ -774,7 +774,7 @@ decimal ContactSolver::computeMixedRestitutionFactor(RigidBody* body1,
 decimal ContactSolver::computeMixedFrictionCoefficient(RigidBody *body1,
                                                               RigidBody *body2) const {
     // Use the geometric mean to compute the mixed friction coefficient
-    return std::sqrt(body1->getMaterial().getFrictionCoefficient() *
+    return cnl::sqrt(body1->getMaterial().getFrictionCoefficient() *
                 body2->getMaterial().getFrictionCoefficient());
 }
 

@@ -716,19 +716,12 @@ void HingeJoint::setMaxMotorTorque(decimal maxMotorTorque) {
 // Given an angle in radian, this method returns the corresponding angle in the range [-pi; pi]
 decimal HingeJoint::computeNormalizedAngle(decimal angle) const {
 
-    // Convert it into the range [-2*pi; 2*pi]
-    angle = fmod(angle, PI_TIMES_2);
+    while (angle > PI)
+        angle -= PI_TIMES_2;
+    while (angle < -PI)
+        angle += PI_TIMES_2;
+    return angle;
 
-    // Convert it into the range [-pi; pi]
-    if (angle < -PI) {
-        return angle + PI_TIMES_2;
-    }
-    else if (angle > PI) {
-        return angle - PI_TIMES_2;
-    }
-    else {
-        return angle;
-    }
 }
 
 // Given an "inputAngle" in the range [-pi, pi], this method returns an
@@ -740,13 +733,13 @@ decimal HingeJoint::computeCorrespondingAngleNearLimits(decimal inputAngle, deci
         return inputAngle;
     }
     else if (inputAngle > upperLimitAngle) {
-        decimal diffToUpperLimit = fabs(computeNormalizedAngle(inputAngle - upperLimitAngle));
-        decimal diffToLowerLimit = fabs(computeNormalizedAngle(inputAngle - lowerLimitAngle));
+        decimal diffToUpperLimit = cnl::abs(computeNormalizedAngle(inputAngle - upperLimitAngle));
+        decimal diffToLowerLimit = cnl::abs(computeNormalizedAngle(inputAngle - lowerLimitAngle));
         return (diffToUpperLimit > diffToLowerLimit) ? (inputAngle - PI_TIMES_2) : inputAngle;
     }
     else if (inputAngle < lowerLimitAngle) {
-        decimal diffToUpperLimit = fabs(computeNormalizedAngle(upperLimitAngle - inputAngle));
-        decimal diffToLowerLimit = fabs(computeNormalizedAngle(lowerLimitAngle - inputAngle));
+        decimal diffToUpperLimit = cnl::abs(computeNormalizedAngle(upperLimitAngle - inputAngle));
+        decimal diffToLowerLimit = cnl::abs(computeNormalizedAngle(lowerLimitAngle - inputAngle));
         return (diffToUpperLimit > diffToLowerLimit) ? inputAngle : (inputAngle + PI_TIMES_2);
     }
     else {
@@ -783,10 +776,10 @@ decimal HingeJoint::computeCurrentHingeAngle(const Quaternion& orientationBody1,
 
     // If the relative rotation axis and the hinge axis are pointing the same direction
     if (dotProduct >= decimal(0.0)) {
-        hingeAngle = decimal(2.0) * std::atan2(sinHalfAngleAbs, cosHalfAngle);
+        hingeAngle = decimal(2.0) * std::atan2(static_cast<float>(sinHalfAngleAbs), static_cast<float>(cosHalfAngle));
     }
     else {
-        hingeAngle = decimal(2.0) * std::atan2(sinHalfAngleAbs, -cosHalfAngle);
+        hingeAngle = decimal(2.0) * std::atan2(static_cast<float>(sinHalfAngleAbs), static_cast<float>(-cosHalfAngle));
     }
 
     // Convert the angle from range [-2*pi; 2*pi] into the range [-pi; pi]

@@ -261,7 +261,8 @@ inline decimal HeightFieldShape::getHeightAt(int x, int y) const {
 
 // Return the closest inside integer grid value of a given floating grid value
 inline int HeightFieldShape::computeIntegerGridValue(decimal value) const {
-    return (value < decimal(0.0)) ? value - decimal(0.5) : value + decimal(0.5);
+    auto biased = (value < decimal(0.0)) ? value - decimal(0.5) : value + decimal(0.5);
+    return static_cast<int>(biased);
 }
 
 // Return the local inertia tensor

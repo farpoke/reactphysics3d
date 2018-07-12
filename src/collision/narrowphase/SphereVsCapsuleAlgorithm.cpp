@@ -83,7 +83,7 @@ bool SphereVsCapsuleAlgorithm::testCollision(NarrowPhaseInfo* narrowPhaseInfo, b
 			// If the sphere center is not on the capsule inner segment
 			if (sphereSegmentDistanceSquare > MACHINE_EPSILON) {
 
-				decimal sphereSegmentDistance = std::sqrt(sphereSegmentDistanceSquare);
+				decimal sphereSegmentDistance = cnl::sqrt(sphereSegmentDistanceSquare);
 				sphereCenterToSegment /= sphereSegmentDistance;
 
 				contactPointSphereLocal = sphereToCapsuleSpaceTransform.getInverse() * (sphereCenter + sphereCenterToSegment * sphereShape->getRadius());
@@ -108,8 +108,8 @@ bool SphereVsCapsuleAlgorithm::testCollision(NarrowPhaseInfo* narrowPhaseInfo, b
 				Vector3 vec2(0, 1, 0);
 
 				// Get the vectors (among vec1 and vec2) that is the most orthogonal to the capsule inner segment (smallest absolute dot product)
-				decimal cosA1 = std::abs(capsuleSegment.x);		// abs(vec1.dot(seg2))
-				decimal cosA2 = std::abs(capsuleSegment.y);	    // abs(vec2.dot(seg2))
+				decimal cosA1 = cnl::abs(capsuleSegment.x);		// abs(vec1.dot(seg2))
+				decimal cosA2 = cnl::abs(capsuleSegment.y);	    // abs(vec2.dot(seg2))
 
 				penetrationDepth = sumRadius;
 

@@ -201,7 +201,7 @@ inline void Vector3::setAllValues(decimal newX, decimal newY, decimal newZ) {
 
 // Return the length of the vector
 inline decimal Vector3::length() const {
-    return std::sqrt(x*x + y*y + z*z);
+    return cnl::sqrt(x*x + y*y + z*z);
 }
 
 // Return the square of the length of the vector
@@ -234,7 +234,7 @@ inline void Vector3::normalize() {
 
 // Return the corresponding absolute value vector
 inline Vector3 Vector3::getAbsoluteVector() const {
-    return Vector3(std::abs(x), std::abs(y), std::abs(z));
+    return Vector3(cnl::abs(x), cnl::abs(y), cnl::abs(z));
 }
 
 // Return the axis with the minimal value

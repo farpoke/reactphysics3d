@@ -105,7 +105,7 @@ class VoronoiSimplex {
 
         /// Compute point of a line segment that is closest to the origin
         void computeClosestPointOnSegment(const Vector3& a, const Vector3& b, int& bitUsedVertices,
-                                          float& t) const;
+                                          decimal& t) const;
 
         /// Compute point of a triangle that is closest to the origin
         void computeClosestPointOnTriangle(const Vector3& a, const Vector3& b,

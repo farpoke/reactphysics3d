@@ -26,14 +26,20 @@
 #ifndef REACTPHYSICS3D_DECIMAL_H
 #define	REACTPHYSICS3D_DECIMAL_H
 
+#include <cnl/all.h>
+
 /// ReactPhysiscs3D namespace
 namespace reactphysics3d {
 
-#if defined(IS_DOUBLE_PRECISION_ENABLED)   // If we are compiling for double precision
-    using decimal = double;
-#else                                   // If we are compiling for single precision
-    using decimal = float;
-#endif
+    using decimal = cnl::fixed_point<std::int32_t, -12>;
+
+}
+
+namespace std {
+
+    std::string to_string(reactphysics3d::decimal x) {
+        return std::to_string((float)x);
+    }
 
 }
 

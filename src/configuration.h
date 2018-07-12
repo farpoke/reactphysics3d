@@ -142,7 +142,7 @@ struct WorldSettings {
     uint defaultPositionSolverNbIterations = 5;
 
     /// Time (in seconds) that a body must stay still to be considered sleeping
-    float defaultTimeBeforeSleep = 1.0f;
+    decimal defaultTimeBeforeSleep = 1.0f;
 
     /// A body with a linear velocity smaller than the sleep linear velocity (in m/s)
     /// might enter sleeping mode.

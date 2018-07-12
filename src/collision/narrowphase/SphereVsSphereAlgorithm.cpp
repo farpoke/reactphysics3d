@@ -59,7 +59,7 @@ bool SphereVsSphereAlgorithm::testCollision(NarrowPhaseInfo* narrowPhaseInfo, bo
 
             Vector3 centerSphere2InBody1LocalSpace = transform1.getInverse() * transform2.getPosition();
             Vector3 centerSphere1InBody2LocalSpace = transform2.getInverse() * transform1.getPosition();
-            decimal penetrationDepth = sumRadius - std::sqrt(squaredDistanceBetweenCenters);
+            decimal penetrationDepth = sumRadius - cnl::sqrt(squaredDistanceBetweenCenters);
 			Vector3 intersectionOnBody1;
 			Vector3 intersectionOnBody2;
 			Vector3 normal;
