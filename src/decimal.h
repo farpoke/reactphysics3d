@@ -37,7 +37,8 @@ namespace reactphysics3d {
 
 namespace std {
 
-    std::string to_string(reactphysics3d::decimal x) {
+    template<typename R, int E>
+    std::string to_string(cnl::fixed_point<R, E> x) {
         return std::to_string((float)x);
     }
 
